@@ -26,4 +26,7 @@ public interface IFileStoreService {
     Collection<FileMetaDTO> getMetaFiles(int subtype);
 
 
+    void deleteFile(String fileHash) throws IOException;
+
+    void deleteFile(UUID md5) throws IOException;
 }
