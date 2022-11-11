@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
@@ -45,5 +43,14 @@ public class FilesController {
     @GetMapping("/getfiles")
     public ResponseEntity<?> downloadFile(@RequestParam("subtype") int subtype) throws IOException {
         return ResponseEntity.ok(fileStoreService.getMetaFiles(subtype));
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteFile(@RequestParam("hash") UUID hash) throws IOException{
+        try {
+            fileStoreService.deleteFile(hash);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
